@@ -4,6 +4,8 @@
     <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
     <title>Basic Example</title>
     <link rel="stylesheet" href="../shared/css/base.css" />
+    <script src="../build/react.js"></script>
+    <script src="../build/JSXTransformer.js"></script>
   </head>
   <body>
     <h1>Lab 3</h1>
@@ -18,29 +20,32 @@
       </p>
     </div>
     
-    <script src="../build/react.js"></script>
-    <script>
-      var ExampleApplication = React.createClass({
-        render: function() {
-          var elapsed = Math.round(this.props.elapsed  / 100);
-          var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
-          var message =
-            'React has been successfully running for ' + seconds + ' seconds.';
+    
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    
+	    var HelloWorld = React.createClass({
+	    getInitialState: function() {
+	        return {
+	            counter: 0
+	        };
+	    },
+	    
+	    increment: function() {
+	        this.setState({ counter: this.state.counter++ });
+	    },
 
-          return React.DOM.p(null, message);
-        }
-      });
+	    render: function() {
+	        return <div>
+	            <div>{this.state.counter}</div>
+	            <button onClick={this.state.increment}>Increment!</button>
+	        </div>;
+	    }
+	});
 
-      // Call React.createFactory instead of directly call ExampleApplication({...}) in React.render
-      var ExampleApplicationFactory = React.createFactory(ExampleApplication);
+	React.render(new HelloWorld(), document.body);
 
-      var start = new Date().getTime();
-      setInterval(function() {
-        React.render(
-          ExampleApplicationFactory({elapsed: new Date().getTime() - start}),
-          document.getElementById('container')
-        );
-      }, 50);
+
     </script>
   </body>
 </html>
