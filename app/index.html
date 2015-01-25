@@ -22,26 +22,35 @@
     <script type="text/jsx">
     /** @jsx React.DOM */
     
-	    var HelloWorld = React.createClass({
+	    var Lab3App = React.createClass({
 	    getInitialState: function() {
+	    	console.log("init");
 	        return {
 	            counter: 0
 	        };
 	    },
 	    
-	    increment: function() {
-	        this.setState({ counter: this.state.counter++ });
+	    add: function(evt) {
+	        console.log("click");
+	        this.setState({ counter: this.state.counter += 1 });
+	    },
+
+	    subtract: function(evt) {
+	        console.log("click");
+	        this.setState({ counter: this.state.counter -= 1 });
 	    },
 
 	    render: function() {
 	        return <div>
-	            <div>{this.state.counter}</div>
-	            <button onClick={this.state.increment}>Increment!</button>
-	        </div>;
-	    }
-	});
-
-	React.render(new HelloWorld(), document.body);
+		        	<h1>Lab 3 React App</h1>
+		        	<em>add or take one from the counter</em>
+		            <div>{this.state.counter}</div>
+		            <button onClick={ this.add }>Add 1</button>
+		            <button onClick={ this.subtract }>Take 1</button>
+	        	</div>;
+		    }
+		});
+		React.render(new Lab3App(), document.body);
     </script>
   </body>
 </html>
